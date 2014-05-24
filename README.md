@@ -1,2 +1,1 @@
-Getting-and-Cleaning-Data-Course-Project
-========================================
+A lazy submission to the course project by a lazy instructor.
