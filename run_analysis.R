@@ -26,7 +26,10 @@ data <- rbind(X_train, X_test)
 
 # Extracts only the measurements on the mean and standard deviation for each measurement.
 names(data) <- features[[2]]
-data <- data[, grepl('mean\\(\\)', features[[2]]) | grepl('std\\(\\)', features[[2]])]
+data <- data[, grepl('mean\\(\\)|std\\(\\)', features[[2]])]
+
+# Appropriately labels the data set with descriptive features names.
+names(data) <- gsub('-(.+)\\(\\)-?', '\\1', names(data))
 
 # Appropriately labels the data set with descriptive activity names.
 activity_train <- sapply(y_train[[1]], function(x){activity_labels[x, 2]})
@@ -45,4 +48,4 @@ data <- melt(data, id.vars= names(data)[(n-1):n], measure.vars=names(data)[c(1:(
 data <- dcast(data, subjects+activities~variable, mean)
 
 # Output
-write.table(data2, output_path, row.names=F)
+write.table(data, output_path, row.names=F)
